@@ -148,7 +148,8 @@
                                                                     <label for="userId" class="form-label">ID</label>
                                                                     <input type="number" th:value="${user.id}"
                                                                            id="userId"
-                                                                           class="form-control w-50 mx-auto" disabled/>
+                                                                           class="form-control w-50 mx-auto"
+                                                                           disabled/>
                                                                     <br>
                                                                 </div>
 
@@ -161,7 +162,7 @@
                                                                            minlength="2"
                                                                            maxlength="50"
                                                                            pattern="[A-Za-zА-Яа-яЁё\s]+"
-                                                                           title="Имя должно содержать только буквы (2-50 символов)"
+                                                                           title="Name should contain only letters, spaces, hyphens and apostrophes (2-50 characters)"
                                                                            required/>
                                                                     <br>
                                                                 </div>
@@ -175,7 +176,7 @@
                                                                            minlength="2"
                                                                            maxlength="50"
                                                                            pattern="[A-Za-zА-Яа-яЁё\s]+"
-                                                                           title="Фамилия должна содержать только буквы (2-50 символов)"
+                                                                           title="Last name should contain only letters, spaces, hyphens and apostrophes (2-50 characters)"
                                                                            required/>
                                                                     <br>
                                                                 </div>
@@ -183,8 +184,11 @@
                                                                 <div class="form-group text-center">
                                                                     <label for="age" class="form-label">Age</label>
                                                                     <input type="number" th:value="${user.age}"
-                                                                           id="age" name="age" max="120" min="0"
-                                                                           class="form-control w-50 mx-auto" required/>
+                                                                           id="age" name="age"
+                                                                           class="form-control w-50 mx-auto"
+                                                                           max="120"
+                                                                           min="0"
+                                                                           required/>
                                                                     <br>
                                                                 </div>
 
@@ -194,7 +198,8 @@
                                                                     <input type="email"
                                                                            th:value="${user.username}"
                                                                            id="username" name="username"
-                                                                           class="form-control w-50 mx-auto" required/>
+                                                                           class="form-control w-50 mx-auto"
+                                                                           required/>
                                                                     <br>
                                                                 </div>
 
@@ -205,8 +210,7 @@
                                                                            id="password" name="password"
                                                                            class="form-control w-50 mx-auto"
                                                                            minlength="5"
-                                                                           maxlength="50"
-                                                                           title="Пароль должен быть от 5 до 50 символов"/>
+                                                                           maxlength="50"/>
                                                                     <br>
                                                                 </div>
 
@@ -361,8 +365,8 @@
                                                    minlength="2"
                                                    maxlength="50"
                                                    pattern="[A-Za-zА-Яа-яЁё\s]+"
-                                                   title="Имя должно содержать только буквы (2-50 символов)" required
-                                            >
+                                                   title="Name should contain only letters, spaces, hyphens and apostrophes (2-50 characters)"
+                                                   required>
                                             <br>
                                         </div>
                                         <div class=" form-group text-center">
@@ -372,14 +376,17 @@
                                                    minlength="2"
                                                    maxlength="50"
                                                    pattern="[A-Za-zА-Яа-яЁё\s]+"
-                                                   title="Фамилия должна содержать только буквы (2-50 символов)"
+                                                   title="Last name should contain only letters, spaces, hyphens and apostrophes (2-50 characters)"
                                                    required>
                                             <br>
                                         </div>
                                         <div class="form-group text-center">
                                             <label for="NewAge">Age</label>
                                             <input type="number" th:field="*{age}" class="form-control w-50 mx-auto"
-                                                   id="NewAge" max="120" min="0" required>
+                                                   id="NewAge"
+                                                   max="120"
+                                                   min="0"
+                                                   required>
                                             <br>
                                         </div>
                                         <div class="form-group text-center">

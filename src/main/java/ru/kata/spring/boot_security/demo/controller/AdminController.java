@@ -9,8 +9,6 @@ import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
-import javax.validation.Valid;
-
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -41,7 +39,7 @@ public class AdminController {
     }
 
     @PostMapping("/saveUser")
-    public String saveUser(@Valid @ModelAttribute("user") User user,
+    public String saveUser(@ModelAttribute("user") User user,
                            BindingResult bindingResult,
                            @RequestParam(value = "newRoles", required = false) String[] newRoles,
                            Model model) {
