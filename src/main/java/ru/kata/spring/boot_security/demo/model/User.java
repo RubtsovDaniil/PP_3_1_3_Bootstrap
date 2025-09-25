@@ -21,30 +21,33 @@ public class User implements UserDetails {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "name", nullable = false)
-    @NotBlank(message = "Поле не может быть пустым")
+    @Column(name = "name")
+    @NotNull(message = "Поле не может быть пустым")
     @Pattern(regexp = "^[A-Za-zА-Яа-яЁё]+$", message = "Имя должно содержать только буквы")
     @Size(min = 2, max = 50, message = "Имя должно быть от 2 до 50 символов")
     private String name;
 
-    @Column(name = "lastname", nullable = false, length = 50)
-    @NotBlank(message = "Поле не может быть пустым")
+    @Column(name = "lastname")
+    @NotNull(message = "Поле не может быть пустым")
     @Pattern(regexp = "^[A-Za-zА-Яа-яЁё]+$", message = "Фамилия должна содержать только буквы")
     @Size(min = 2, max = 50, message = "Имя должно быть от 2 до 50 символов")
     private String lastName;
 
-    @Column(name = "age", nullable = false, length = 50)
+    @Column(name = "age")
     @NotNull(message = "Поле не может быть пустым")
-    @Min(value = 0, message = "Возраст не может быть отрицательным")
+    @Min(value = 0, message = "Возраст не может быть меньше 0")
     @Max(value = 120, message = "Возраст не может превышать 120 лет")
     private Byte age;
 
-    @Column(unique = true, nullable = false)
-    @Size(min =5, message = "Email не меньше 5 символов")
+    @Column(unique = true)
+    @Email
+    @NotNull(message = "Поле не может быть пустым")
+    @Min(value = 5, message = "Email не может быть меньше 5 символов")
     private String username;
 
-    @Column(nullable = false)
-    @Size(min = 5, message = "Пароль не меньше 5 символов")
+    @Column(name = "password")
+    @NotNull(message = "Поле не может быть пустым")
+    @Min(value = 5, message = "Пароль не может быть меньше 5 символов")
     private String password;
 
     @ManyToMany(fetch = FetchType.LAZY)
