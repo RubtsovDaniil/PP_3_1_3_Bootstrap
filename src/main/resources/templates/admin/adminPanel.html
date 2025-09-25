@@ -183,7 +183,7 @@
                                                                 <div class="form-group text-center">
                                                                     <label for="age" class="form-label">Age</label>
                                                                     <input type="number" th:value="${user.age}"
-                                                                           id="age" name="age"
+                                                                           id="age" name="age" max="120" min="0"
                                                                            class="form-control w-50 mx-auto" required/>
                                                                     <br>
                                                                 </div>
@@ -379,7 +379,7 @@
                                         <div class="form-group text-center">
                                             <label for="NewAge">Age</label>
                                             <input type="number" th:field="*{age}" class="form-control w-50 mx-auto"
-                                                   id="NewAge" required>
+                                                   id="NewAge" max="120" min="0" required>
                                             <br>
                                         </div>
                                         <div class="form-group text-center">
