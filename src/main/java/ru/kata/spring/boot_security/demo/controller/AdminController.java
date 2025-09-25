@@ -40,13 +40,7 @@ public class AdminController {
 
     @PostMapping("/saveUser")
     public String saveUser(@ModelAttribute("user") User user,
-                           BindingResult bindingResult,
-                           @RequestParam(value = "newRoles", required = false) String[] newRoles,
-                           Model model) {
-        if (bindingResult.hasErrors()) {
-            model.addAttribute("roles", roleService.getAllRoles());
-            return "admin/adminPanel";
-        }
+                           @RequestParam(value = "newRoles", required = false) String[] newRoles) {
         userService.setUserRoles(user, newRoles);
         userService.saveUser(user);
         return "redirect:/admin";
@@ -54,15 +48,23 @@ public class AdminController {
 
     @PostMapping("/updateUser")
     public String updateUser(@RequestParam("userId") long id,
-                             @RequestParam("name") String name,
-                             @RequestParam("lastName") String lastName,
-                             @RequestParam("age") byte age,
-                             @RequestParam("username") String username,
-                             @RequestParam(value = "password", required = false) String password,
+                             @ModelAttribute User user,
                              @RequestParam(value = "selectedRoles", required = false) String[] selectedRoles) {
-        userService.updateUserWithRoles(id, name, lastName, age, username, password, selectedRoles);
+        userService.updateUser(id, user, selectedRoles);
         return "redirect:/admin";
     }
+
+//    @PostMapping("/updateUser")
+//    public String updateUser(@RequestParam("userId") long id,
+//                             @RequestParam("name") String name,
+//                             @RequestParam("lastName") String lastName,
+//                             @RequestParam("age") byte age,
+//                             @RequestParam("username") String username,
+//                             @RequestParam(value = "password", required = false) String password,
+//                             @RequestParam(value = "selectedRoles", required = false) String[] selectedRoles) {
+//        userService.updateUserWithRoles(id, name, lastName, age, username, password, selectedRoles);
+//        return "redirect:/admin";
+//    }
 
     @PostMapping("/deleteUser")
     public String deleteUser(@RequestParam("userId") long id) {

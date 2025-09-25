@@ -16,10 +16,10 @@ public interface UserService {
 
     void deleteUser(long id);
 
-    void updateUser(User user);
+    void updateUser(long id, User user, String[] selectedRoles);
 
     void setUserRoles(User user, String[] selectedRoles);
 
-    void updateUserWithRoles(long id, String name, String lastName, byte age,
-                             String username, String password, String[] selectedRoles);
+//    void updateUserWithRoles(long id, String name, String lastName, byte age,
+//                             String username, String password, String[] selectedRoles);
 }

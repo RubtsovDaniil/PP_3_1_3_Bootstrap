@@ -2,11 +2,14 @@ package ru.kata.spring.boot_security.demo.service;
 
 
 import javax.persistence.EntityNotFoundException;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
 import ru.kata.spring.boot_security.demo.dao.UserDao;
 import ru.kata.spring.boot_security.demo.model.Role;
 import ru.kata.spring.boot_security.demo.model.User;
@@ -58,8 +61,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void updateUser(User user) {
+    public void updateUser(long id, User user,
+                           String[] selectedRoles) {
         User existingUser = getUserById(user.getId());
+        existingUser.setId(user.getId());
         existingUser.setName(user.getName());
         existingUser.setLastName(user.getLastName());
         existingUser.setAge(user.getAge());
@@ -68,7 +73,9 @@ public class UserServiceImpl implements UserService {
         if (user.getPassword() != null && !user.getPassword().trim().isEmpty()) {
             existingUser.setPassword(passwordEncoder.encode(user.getPassword()));
         }
-        existingUser.setRoles(user.getRoles());
+        if (selectedRoles != null) {
+            setUserRoles(existingUser, selectedRoles);
+        }
     }
 
     @Override
@@ -82,20 +89,19 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-    @Transactional
-    @Override
-    public void updateUserWithRoles(long id, String name, String lastName, byte age,
-                                    String username, String password, String[] selectedRoles) {
-        User user = getUserById(id);
-        user.setName(name);
-        user.setLastName(lastName);
-        user.setAge(age);
-        user.setUsername(username);
-
-        if (password != null && !password.trim().isEmpty()) {
-            user.setPassword(passwordEncoder.encode(password));
-        }
-        setUserRoles(user, selectedRoles);
-        updateUser(user);
-    }
+//    @Transactional
+//    @Override
+//    public void updateUserWithRoles(User user) {
+//        User userUpdated = getUserById(user.getId());
+//        userUpdated.setName(user.getName());
+//        userUpdated.setLastName(user.getLastName());
+//        userUpdated.setAge(user.getAge());
+//        userUpdated.setUsername(user.getUsername());
+//
+//        if (userUpdated.getPassword() != null && !userUpdated.getPassword() .trim().isEmpty()) {
+//            user.setPassword(passwordEncoder.encode(userUpdated.getPassword() ));
+//        }
+//        setUserRoles(user, userUpdated.getSelectedRoles());
+//        updateUser(user);
+//    }
 }
