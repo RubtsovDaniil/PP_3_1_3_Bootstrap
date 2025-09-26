@@ -42,12 +42,10 @@ public class User implements UserDetails {
     @Column(unique = true)
     @Email
     @NotNull(message = "Поле не может быть пустым")
-    @Min(value = 5, message = "Email не может быть меньше 5 символов")
     private String username;
 
     @Column(name = "password")
     @NotNull(message = "Поле не может быть пустым")
-    @Min(value = 5, message = "Пароль не может быть меньше 5 символов")
     private String password;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -61,6 +59,10 @@ public class User implements UserDetails {
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {

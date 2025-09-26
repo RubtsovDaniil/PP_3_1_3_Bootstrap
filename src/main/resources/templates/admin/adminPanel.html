@@ -219,7 +219,7 @@
                                                                            class="form-label">Role</label>
                                                                     <select class="form-select w-50 mx-auto"
                                                                             id="selectedRoles" name="selectedRoles"
-                                                                            multiple size="2">
+                                                                            multiple size="2" required>
                                                                         <option th:each="role : ${roles}"
                                                                                 th:value="${role.name}"
                                                                                 th:text="${role.name}"
@@ -408,8 +408,8 @@
 
                                             <div class="mb-3 text-center">
                                                 <label for="newRoles" class="form-label">Role</label>
-                                                <select class="form-select w-50 mx-auto" id="newRoles" name="newRoles"
-                                                        multiple size="2">
+                                                <select class="form-select w-50 mx-auto" id="newRoles" name="newRoles "
+                                                        multiple size="2" required>
                                                     <option th:each="role : ${roles}"
                                                             th:value="${role.name}"
                                                             th:text="${role.name}"

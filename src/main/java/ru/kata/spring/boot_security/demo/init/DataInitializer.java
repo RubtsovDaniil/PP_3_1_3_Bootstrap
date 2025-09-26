@@ -52,8 +52,10 @@ public class DataInitializer implements CommandLineRunner {
             Set<Role> adminRoles = new HashSet<>();
             adminRoles.add(adminRole);
             adminRoles.add(userRole);
-            adminUser.setRoles(adminRoles);
-            userService.saveUser(adminUser);
+            String[] roleNames = adminRoles.stream()
+                    .map(Role::getName)
+                    .toArray(String[]::new);
+            userService.saveUser(adminUser, roleNames);
         }
         Optional<User> regularUserOpt = userRepository.findByUsername("user@mail.ru");
         if (regularUserOpt.isEmpty()) {
@@ -65,8 +67,10 @@ public class DataInitializer implements CommandLineRunner {
             regularUser.setAge((byte) 60);
             Set<Role> userRoles = new HashSet<>();
             userRoles.add(userRole);
-            regularUser.setRoles(userRoles);
-            userService.saveUser(regularUser);
+            String[] roleNames = userRoles.stream()
+                    .map(Role::getName)
+                    .toArray(String[]::new);
+            userService.saveUser(regularUser, roleNames);
         }
     }
 }

@@ -44,8 +44,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public void saveUser(User user) {
+    public void saveUser(User user, String[] newRoles) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        setUserRoles(user, newRoles);
         userDao.saveUser(user);
     }
 
@@ -54,21 +55,6 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(long id) {
         getUserById(id);
         userDao.deleteUser(id);
-    }
-
-    @Override
-    @Transactional
-    public void updateUser(User user) {
-        User existingUser = getUserById(user.getId());
-        existingUser.setName(user.getName());
-        existingUser.setLastName(user.getLastName());
-        existingUser.setAge(user.getAge());
-        existingUser.setUsername(user.getUsername());
-        // Обновляем пароль только если он не пустой
-        if (user.getPassword() != null && !user.getPassword().trim().isEmpty()) {
-            existingUser.setPassword(passwordEncoder.encode(user.getPassword()));
-        }
-        existingUser.setRoles(user.getRoles());
     }
 
     @Override
@@ -84,18 +70,18 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public void updateUserWithRoles(long id, String name, String lastName, byte age,
-                                    String username, String password, String[] selectedRoles) {
-        User user = getUserById(id);
-        user.setName(name);
-        user.setLastName(lastName);
-        user.setAge(age);
-        user.setUsername(username);
-
-        if (password != null && !password.trim().isEmpty()) {
-            user.setPassword(passwordEncoder.encode(password));
+    public void updateUser(long id, User user, String[] selectedRoles) {
+        user.setId(id);
+        User existingUser = getUserById(user.getId());
+        existingUser.setName(user.getName());
+        existingUser.setLastName(user.getLastName());
+        existingUser.setAge(user.getAge());
+        existingUser.setUsername(user.getUsername());
+        // Обновляем пароль только если он не пустой
+        if (user.getPassword() != null && !user.getPassword().trim().isEmpty()) {
+            existingUser.setPassword(passwordEncoder.encode(user.getPassword()));
         }
-        setUserRoles(user, selectedRoles);
-        updateUser(user);
+        setUserRoles(existingUser, selectedRoles);
+        userDao.updateUser(existingUser);
     }
 }

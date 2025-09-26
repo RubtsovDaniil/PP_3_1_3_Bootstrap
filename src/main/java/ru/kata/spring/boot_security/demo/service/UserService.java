@@ -12,14 +12,12 @@ public interface UserService {
 
     User getUserById(long id);
 
-    void saveUser(User user);
+    void saveUser(User user, String[] newRoles);
 
     void deleteUser(long id);
 
-    void updateUser(User user);
-
     void setUserRoles(User user, String[] selectedRoles);
 
-    void updateUserWithRoles(long id, String name, String lastName, byte age,
-                             String username, String password, String[] selectedRoles);
+    void updateUser(long id, User user, String[] selectedRoles);
+
 }
