@@ -23,15 +23,16 @@ public class AdminController {
     }
 
     @GetMapping
-    public String userList(@RequestParam(value = "editUserId", required = false) Long editUserId, Model model) {
+    public String getUserAddForm(Model model) {
         model.addAttribute("users", userService.getAllUsers());
         model.addAttribute("roles", roleService.getAllRoles());
+        model.addAttribute("newUser", new User());
+        return "admin/adminPanel";
+    }
 
-        if (editUserId != null) {
-            model.addAttribute("existingUser", userService.getUserById(editUserId));
-        } else {
-            model.addAttribute("newUser", new User());
-        }
+    @GetMapping("/updateUser")
+    public String getUserUpdateForm(@RequestParam(value = "editUserId") Long editUserId, Model model) {
+        model.addAttribute("existingUser", userService.getUserById(editUserId));
         return "admin/adminPanel";
     }
 
