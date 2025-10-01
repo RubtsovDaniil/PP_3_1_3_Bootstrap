@@ -353,14 +353,14 @@
                                 <div class="card-body">
                                     <form method="post"
                                           th:action="@{/admin/saveUser}"
-                                          th:object="${newUser}">
+                                          >
 
-                                        <input type="hidden" th:field="*{id}"/>
+                                        <input type="hidden" th:value="${newUser.id}"/>
 
                                         <div class="form-group text-center">
                                             <label for="NewName">First name</label>
-                                            <input type="text" th:field="*{name}" class="form-control w-50 mx-auto"
-                                                   id="NewName"
+                                            <input type="text" th:value="${newUser.name}" class="form-control w-50 mx-auto"
+                                                   id="NewName" name="name"
                                                    minlength="2"
                                                    maxlength="50"
                                                    pattern="[A-Za-zА-Яа-яЁё\s]+"
@@ -370,8 +370,8 @@
                                         </div>
                                         <div class=" form-group text-center">
                                             <label for="NewLastName">Last name</label>
-                                            <input type="text" th:field="*{lastName}" class="form-control w-50 mx-auto"
-                                                   id="NewLastName"
+                                            <input type="text" th:value="${newUser.lastName}" class="form-control w-50 mx-auto"
+                                                   id="NewLastName" name="lastName"
                                                    minlength="2"
                                                    maxlength="50"
                                                    pattern="[A-Za-zА-Яа-яЁё\s]+"
@@ -381,8 +381,8 @@
                                         </div>
                                         <div class="form-group text-center">
                                             <label for="NewAge">Age</label>
-                                            <input type="number" th:field="*{age}" class="form-control w-50 mx-auto"
-                                                   id="NewAge"
+                                            <input type="number" th:value="${newUser.age}" class="form-control w-50 mx-auto"
+                                                   id="NewAge" name="age"
                                                    max="120"
                                                    min="0"
                                                    required>
@@ -390,15 +390,15 @@
                                         </div>
                                         <div class="form-group text-center">
                                             <label for="NewUserName">Email</label>
-                                            <input type="email" th:field="*{username}" class="form-control w-50 mx-auto"
-                                                   id="NewUserName"
+                                            <input type="email" th:value="${newUser.username}" class="form-control w-50 mx-auto"
+                                                   id="NewUserName" name="username"
                                                    required>
                                             <br>
                                         </div>
                                         <div class="form-group text-center">
                                             <label for="NewPassword">Password</label>
-                                            <input type="password" th:field="*{password}"
-                                                   class="form-control w-50 mx-auto" id="NewPassword"
+                                            <input type="password" th:value="${newUser.password}" class="form-control w-50 mx-auto"
+                                                   id="NewPassword" name="password"
                                                    minlength="5"
                                                    maxlength="50"
                                                    title="Пароль должен быть от 5 до 50 символов"
