@@ -138,8 +138,7 @@
                                                         <div class="modal-body">
 
                                                             <form th:action="@{/admin/updateUser}"
-                                                                  method="post"
-                                                                  th:object="${user}">
+                                                                  method="post">
 
                                                                 <input type="hidden" name="userId"
                                                                        th:value="${user.id}"/>
@@ -354,7 +353,7 @@
                                 <div class="card-body">
                                     <form method="post"
                                           th:action="@{/admin/saveUser}"
-                                          th:object="${user}">
+                                          th:object="${newUser}">
 
                                         <input type="hidden" th:field="*{id}"/>
 
@@ -408,12 +407,12 @@
 
                                             <div class="mb-3 text-center">
                                                 <label for="newRoles" class="form-label">Role</label>
-                                                <select class="form-select w-50 mx-auto" id="newRoles" name="newRoles "
+                                                <select class="form-select w-50 mx-auto" id="newRoles" name="newRoles"
                                                         multiple size="2" required>
                                                     <option th:each="role : ${roles}"
                                                             th:value="${role.name}"
                                                             th:text="${role.name}"
-                                                            th:selected="${#lists.contains(user.roles, role)}">
+                                                    >
                                                     </option>
                                                 </select>
                                             </div>

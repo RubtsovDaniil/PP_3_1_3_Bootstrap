@@ -23,16 +23,21 @@ public class AdminController {
     }
 
     @GetMapping
-    public String userList(Model model) {
+    public String userList(@RequestParam(value = "editUserId", required = false) Long editUserId, Model model) {
         model.addAttribute("users", userService.getAllUsers());
-        model.addAttribute("user", new User());
         model.addAttribute("roles", roleService.getAllRoles());
+
+        if (editUserId != null) {
+            model.addAttribute("existingUser", userService.getUserById(editUserId));
+        } else {
+            model.addAttribute("newUser", new User());
+        }
         return "admin/adminPanel";
     }
 
     @PostMapping("/saveUser")
-    public String saveUser(@ModelAttribute("user") User user,
-                           @RequestParam(value = "newRoles", required = false) String[] newRoles) {
+    public String saveUser(@ModelAttribute("newUser") User user,
+                           @RequestParam(value = "newRoles") String[] newRoles) {
         userService.saveUser(user, newRoles);
         return "redirect:/admin";
     }
